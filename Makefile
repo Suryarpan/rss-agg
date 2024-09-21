@@ -1,7 +1,7 @@
 all: run
 
 build:
-	go build -o bin/rss-agg main.go
+	go build -o bin/rss-agg
 
 run: build
 	./bin/rss-agg
