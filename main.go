@@ -56,10 +56,15 @@ func main() {
 
 	// nested router
 	v1Router := chi.NewRouter()
+	// Basic setup
 	v1Router.Get("/health", handlerReadiness)
 	v1Router.Get("/err", handlerError)
+	// User setup
 	v1Router.Get("/users", apiCfg.middlewareAuth(apiCfg.handlerGetUser))
 	v1Router.Post("/users", apiCfg.handlerCreateUser)
+	// Feed setup
+	v1Router.Post("/feeds", apiCfg.middlewareAuth(apiCfg.handlerCreateFeed))
+	v1Router.Get("/feeds", apiCfg.handlerGetFeeds)
 	
 	// mount to original router
 	router.Mount("/v1", v1Router)
